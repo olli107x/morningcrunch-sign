@@ -114,7 +114,9 @@ module Submissions
         },
         {
           name: column_name(I18n.t('link'), submitter_name, submitters_count),
-          value: submitter.completed_at? ? nil : r.submit_form_url(slug: submitter.slug, **MorningcrunchSign.default_url_options)
+          value: submitter.completed_at? ? nil : r.submit_form_url(
+            slug: submitter.slug, **MorningcrunchSign.default_url_options
+          )
         }
       ].reject { |e| e[:value].blank? }
     end

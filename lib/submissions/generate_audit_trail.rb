@@ -71,8 +71,9 @@ module Submissions
 
     def build_audit_trail(submission)
       account = submission.account
+      default_host = MorningcrunchSign.default_url_options[:host]
       verify_url = Rails.application.routes.url_helpers.settings_esign_url(
-        **MorningcrunchSign.default_url_options, host: ENV.fetch('EMAIL_HOST', MorningcrunchSign.default_url_options[:host])
+        **MorningcrunchSign.default_url_options, host: ENV.fetch('EMAIL_HOST', default_host)
       )
 
       page_size =

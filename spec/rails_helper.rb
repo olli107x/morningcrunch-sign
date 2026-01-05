@@ -76,7 +76,7 @@ RSpec.configure do |config|
   end
 
   config.before(multitenant: true) do
-    allow(morningcrunch Sign).to receive(:multitenant?).and_return(true)
+    allow(MorningcrunchSign).to receive(:multitenant?).and_return(true)
   end
 end
 

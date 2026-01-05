@@ -16,7 +16,8 @@ class ApplicationMailer < ActionMailer::Base
   after_action :set_message_uuid
 
   def default_url_options
-    MorningcrunchSign.default_url_options.merge(host: ENV.fetch('EMAIL_HOST', MorningcrunchSign.default_url_options[:host]))
+    default_host = MorningcrunchSign.default_url_options[:host]
+    MorningcrunchSign.default_url_options.merge(host: ENV.fetch('EMAIL_HOST', default_host))
   end
 
   def set_message_metadata

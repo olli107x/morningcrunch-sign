@@ -19,6 +19,7 @@ module Submitters
       documents = build_documents_array(submitter, expires_at:)
 
       submission = submitter.submission
+      url_opts = MorningcrunchSign.default_url_options
 
       submitter_name = (submission.template_submitters ||
                         submission.template.submitters).find { |e| e['uuid'] == submitter.uuid }['name']
@@ -33,7 +34,7 @@ module Submitters
                       'values' => values,
                       'documents' => documents,
                       'audit_log_url' => submitter.submission.audit_log_url(expires_at:),
-                      'submission_url' => r.submissions_preview_url(submission.slug, **MorningcrunchSign.default_url_options),
+                      'submission_url' => r.submissions_preview_url(submission.slug, **url_opts),
                       'template' => submission.template.as_json(
                         only: %i[id name external_id created_at updated_at], methods: %i[folder_name]
                       ),
@@ -42,7 +43,7 @@ module Submitters
                         'audit_log_url' => submission.audit_log_url(expires_at:),
                         'combined_document_url' => submission.combined_document_url(expires_at:),
                         'status' => build_submission_status(submission),
-                        'url' => r.submissions_preview_url(submission.slug, **MorningcrunchSign.default_url_options),
+                        'url' => r.submissions_preview_url(submission.slug, **url_opts),
                         'variables' => (submission.variables || {}).as_json,
                         'created_at' => submission.created_at.as_json
                       })
