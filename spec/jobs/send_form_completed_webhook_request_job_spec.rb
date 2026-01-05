@@ -21,39 +21,43 @@ RSpec.describe SendFormCompletedWebhookRequestJob do
     end
 
     it 'sends a webhook request' do
-      described_class.new.perform('submitter_id' => submitter.id, 'webhook_url_id' => webhook_url.id,
-                                  'event_uuid' => SecureRandom.uuid)
+      freeze_time do
+        described_class.new.perform('submitter_id' => submitter.id, 'webhook_url_id' => webhook_url.id,
+                                    'event_uuid' => SecureRandom.uuid)
 
-      expect(WebMock).to have_requested(:post, webhook_url.url).with(
-        body: {
-          'event_type' => 'form.completed',
-          'timestamp' => /.*/,
-          'data' => JSON.parse(Submitters::SerializeForWebhook.call(submitter.reload).to_json)
-        },
-        headers: {
-          'Content-Type' => 'application/json',
-          'User-Agent' => 'MorningcrunchSign.com Webhook'
-        }
-      ).once
+        expect(WebMock).to have_requested(:post, webhook_url.url).with(
+          body: {
+            'event_type' => 'form.completed',
+            'timestamp' => /.*/,
+            'data' => JSON.parse(Submitters::SerializeForWebhook.call(submitter.reload).to_json)
+          },
+          headers: {
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'MorningcrunchSign.com Webhook'
+          }
+        ).once
+      end
     end
 
     it 'sends a webhook request with the secret' do
-      webhook_url.update(secret: { 'X-Secret-Header' => 'secret_value' })
-      described_class.new.perform('submitter_id' => submitter.id, 'webhook_url_id' => webhook_url.id,
-                                  'event_uuid' => SecureRandom.uuid)
+      freeze_time do
+        webhook_url.update(secret: { 'X-Secret-Header' => 'secret_value' })
+        described_class.new.perform('submitter_id' => submitter.id, 'webhook_url_id' => webhook_url.id,
+                                    'event_uuid' => SecureRandom.uuid)
 
-      expect(WebMock).to have_requested(:post, webhook_url.url).with(
-        body: {
-          'event_type' => 'form.completed',
-          'timestamp' => /.*/,
-          'data' => JSON.parse(Submitters::SerializeForWebhook.call(submitter.reload).to_json)
-        },
-        headers: {
-          'Content-Type' => 'application/json',
-          'User-Agent' => 'MorningcrunchSign.com Webhook',
-          'X-Secret-Header' => 'secret_value'
-        }
-      ).once
+        expect(WebMock).to have_requested(:post, webhook_url.url).with(
+          body: {
+            'event_type' => 'form.completed',
+            'timestamp' => /.*/,
+            'data' => JSON.parse(Submitters::SerializeForWebhook.call(submitter.reload).to_json)
+          },
+          headers: {
+            'Content-Type' => 'application/json',
+            'User-Agent' => 'MorningcrunchSign.com Webhook',
+            'X-Secret-Header' => 'secret_value'
+          }
+        ).once
+      end
     end
 
     it "doesn't send a webhook request if the event is not in the webhook's events" do
