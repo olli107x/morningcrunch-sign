@@ -48,6 +48,12 @@ Style/MultipleComparison:
 Style/NumericPredicate:
   Enabled: false
 
+Style/StringLiterals:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys
+
 Naming/PredicateMethod:
   Enabled: false
 
