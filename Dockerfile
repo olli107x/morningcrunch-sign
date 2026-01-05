@@ -93,8 +93,8 @@ COPY --from=webpack /app/public/packs ./public/packs
 RUN ln -s /fonts /app/public/fonts
 RUN bundle exec bootsnap precompile -j 1 --gemfile app/ lib/
 
-WORKDIR /data/morningcrunch-sign
 ENV WORKDIR=/data/morningcrunch-sign
 
 EXPOSE 3000
-CMD ["bundle", "exec", "puma", "-C", "/app/config/puma.rb", "--dir", "/app"]
+WORKDIR /app
+CMD ["bundle", "exec", "puma", "-C", "/app/config/puma.rb"]
