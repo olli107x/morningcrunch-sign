@@ -45,6 +45,18 @@ Metrics/PerceivedComplexity:
 Style/IfUnlessModifier:
   Enabled: false
 
+Style/NegatedIf:
+  Enabled: false
+
+Style/EmptyElse:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
 Style/MultipleComparison:
   Enabled: false
 
