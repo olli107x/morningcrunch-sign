@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   check_authorization unless: :devise_controller?
 
   around_action :with_locale
-  before_action :sign_in_for_demo, if: -> { Docuseal.demo? }
+  before_action :sign_in_for_demo, if: -> { MorningcrunchSign.demo? }
   before_action :maybe_redirect_to_setup, unless: :signed_in?
   before_action :authenticate_user!, unless: :devise_controller?
 
@@ -41,11 +41,11 @@ class ApplicationController < ActionController::Base
   end
 
   def default_url_options
-    if request.domain == 'docuseal.com'
-      return { host: 'docuseal.com', protocol: ENV['FORCE_SSL'].present? ? 'https' : 'http' }
+    if request.domain == 'sign.morningcrunch.cloud'
+      return { host: 'sign.morningcrunch.cloud', protocol: ENV['FORCE_SSL'].present? ? 'https' : 'http' }
     end
 
-    Docuseal.default_url_options
+    MorningcrunchSign.default_url_options
   end
 
   def impersonate_user(user)
@@ -117,11 +117,11 @@ class ApplicationController < ActionController::Base
   end
 
   def form_link_host
-    Docuseal.default_url_options[:host]
+    MorningcrunchSign.default_url_options[:host]
   end
 
   def maybe_redirect_com
-    return if request.domain != 'docuseal.co'
+    return if request.domain != 'sign.morningcrunch.cloud'
 
     redirect_to request.url.gsub('.co/', '.com/'), allow_other_host: true, status: :moved_permanently
   end

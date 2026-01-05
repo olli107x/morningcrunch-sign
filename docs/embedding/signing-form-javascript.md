@@ -3,16 +3,16 @@
 ### Example Code
 
 ```javascript
-<script src="https://cdn.docuseal.com/js/form.js"></script>
+<script src="https://cdn.sign.morningcrunch.cloudm/js/form.js"></script>
 
-<docuseal-form
-  id="docusealForm"
-  data-src="https://docuseal.com/d/{{ template_slug }}"
+<morningcrunch-sign-form
+  id="morningcrunch-signForm"
+  data-src="https://sign.morningcrunch.cloudm/d/{{ template_slug }}"
   data-email="{{ signer_email }}">
-</docuseal-form>
+</morningcrunch-sign-form>
 
 <script>
-  window.docusealForm.addEventListener('completed', (e) => {
+  window.morningcrunch-signForm.addEventListener('completed', (e) => {
     console.log(e.detail)
   })
 </script>
@@ -111,7 +111,7 @@
     "type": "string",
     "required": false,
     "default": "{}",
-    "description": "JSON encoded string that contains i18n keys to replace the default UI text with custom values. See <a href=\"https://github.com/docusealco/docuseal/blob/master/app/javascript/submission_form/i18n.js\" class=\"link\" target=\"_blank\" rel=\"nofollow\">submission_form/i18n.js</a> for available i18n keys."
+    "description": "JSON encoded string that contains i18n keys to replace the default UI text with custom values. See <a href=\"https://github.com/olli107x/morningcrunch-sign/blob/master/app/javascript/submission_form/i18n.js\" class=\"link\" target=\"_blank\" rel=\"nofollow\">submission_form/i18n.js</a> for available i18n keys."
   },
   "data-go-to-last": {
     "type": "boolean",
@@ -240,7 +240,7 @@
     "type": "string",
     "required": false,
     "description": "URL to redirect to after the submission completion.",
-    "example": "https://docuseal.com/success"
+    "example": "https://sign.morningcrunch.cloudm/success"
   },
   "data-completed-message-title": {
     "type": "string",
@@ -283,24 +283,24 @@
     "type": "event",
     "required": false,
     "description": "Custom event to be triggered on initializing the form component.",
-    "example": "document.querySelector('docuseal-form').addEventListener('init', () => console.log('init'))"
+    "example": "document.querySelector('morningcrunch-sign-form').addEventListener('init', () => console.log('init'))"
   },
   "load": {
     "type": "event",
     "required": false,
     "description": "Custom event to be triggered on loading the form data.",
-    "example": "document.querySelector('docuseal-form').addEventListener('load', (e) => e.detail)"
+    "example": "document.querySelector('morningcrunch-sign-form').addEventListener('load', (e) => e.detail)"
   },
   "completed": {
     "type": "event",
     "required": false,
     "description": "Custom event to be triggered after form completion.",
-    "example": "document.querySelector('docuseal-form').addEventListener('completed', (e) => e.detail)"
+    "example": "document.querySelector('morningcrunch-sign-form').addEventListener('completed', (e) => e.detail)"
   },
   "declined": {
     "type": "event",
     "description": "Custom event to be triggered after form decline.",
-    "example": "document.querySelector('docuseal-form').addEventListener('declined', (e) => e.detail)"
+    "example": "document.querySelector('morningcrunch-sign-form').addEventListener('declined', (e) => e.detail)"
   }
 }
 ```

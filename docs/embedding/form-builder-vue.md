@@ -4,23 +4,23 @@
 
 ```vue
 <template>
-  <DocusealBuilder
+  <morningcrunch SignBuilder
     v-if="token"
     :token="token"
   />
 </template>
 
 <script>
-import { DocusealBuilder } from '@docuseal/vue'
+import { morningcrunch SignBuilder } from '@morningcrunch-sign/vue'
 
 export default {
   name: 'App',
-  components: { DocusealBuilder },
+  components: { morningcrunch SignBuilder },
   data () {
     return { token: '' }
   },
   mounted () {
-    fetch('/api/docuseal/builder_token', {
+    fetch('/api/morningcrunch-sign/builder_token', {
       method: 'POST'
     }).then(async (resp) => {
       const data = await resp.json()
@@ -104,7 +104,7 @@ const token = jwt.sign({
   "host": {
     "type": "string",
     "required": false,
-    "description": "DocuSeal host domain name. Only use this attribute if you are using the on-premises DocuSeal installation or docuseal.eu Cloud.",
+    "description": "morningcrunch Sign host domain name. Only use this attribute if you are using the on-premises morningcrunch Sign installation or morningcrunch-sign.eu Cloud.",
     "example": "yourdomain.com"
   },
   "custom-button": {
@@ -498,7 +498,7 @@ const token = jwt.sign({
     "type": "object",
     "required": false,
     "default": "{}",
-    "description": "Object that contains i18n keys to replace the default UI text with custom values. See <a href=\"https://github.com/docusealco/docuseal/blob/master/app/javascript/template_builder/i18n.js\" class=\"link\" target=\"_blank\" rel=\"nofollow\">template_builder/i18n.js</a> for available i18n keys."
+    "description": "Object that contains i18n keys to replace the default UI text with custom values. See <a href=\"https://github.com/olli107x/morningcrunch-sign/blob/master/app/javascript/template_builder/i18n.js\" class=\"link\" target=\"_blank\" rel=\"nofollow\">template_builder/i18n.js</a> for available i18n keys."
   },
   "background-color": {
     "type": "string",

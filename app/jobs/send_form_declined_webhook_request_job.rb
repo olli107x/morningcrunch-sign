@@ -20,7 +20,7 @@ class SendFormDeclinedWebhookRequestJob
 
     return if webhook_url.url.blank? || webhook_url.events.exclude?('form.declined')
 
-    ActiveStorage::Current.url_options = Docuseal.default_url_options
+    ActiveStorage::Current.url_options = MorningcrunchSign.default_url_options
 
     resp = SendWebhookRequest.call(webhook_url, event_type: 'form.declined',
                                                 event_uuid: params['event_uuid'],
@@ -29,7 +29,7 @@ class SendFormDeclinedWebhookRequestJob
                                                 data: Submitters::SerializeForWebhook.call(submitter))
 
     if (resp.nil? || resp.status.to_i >= 400) && attempt <= MAX_ATTEMPTS &&
-       (!Docuseal.multitenant? || submitter.account.account_configs.exists?(key: :plan))
+       (!MorningcrunchSign.multitenant? || submitter.account.account_configs.exists?(key: :plan))
       SendFormDeclinedWebhookRequestJob.perform_in((2**attempt).minutes, {
                                                      **params,
                                                      'attempt' => attempt + 1,

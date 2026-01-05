@@ -13,7 +13,7 @@ module Accounts
     new_user.uuid = SecureRandom.uuid
     new_user.account = new_account
     new_user.encrypted_password = SecureRandom.hex
-    new_user.email = "#{SecureRandom.hex}@docuseal.com"
+    new_user.email = "#{SecureRandom.hex}@sign.morningcrunch.cloud"
 
     account.templates.each do |template|
       new_template = template.dup
@@ -107,22 +107,22 @@ module Accounts
 
   def load_signing_pkcs(account)
     cert_data =
-      if Docuseal.multitenant?
+      if MorningcrunchSign.multitenant?
         data = EncryptedConfig.find_by(account:, key: EncryptedConfig::ESIGN_CERTS_KEY)&.value
 
-        return Docuseal.default_pkcs if data.blank?
+        return MorningcrunchSign.default_pkcs if data.blank?
 
         data
       else
-        return Docuseal.default_pkcs if Docuseal::CERTS.present?
+        return MorningcrunchSign.default_pkcs if MorningcrunchSign::CERTS.present?
 
         EncryptedConfig.find_by(account:, key: EncryptedConfig::ESIGN_CERTS_KEY)&.value ||
           EncryptedConfig.find_by(key: EncryptedConfig::ESIGN_CERTS_KEY).value
       end
 
     if (default_cert = cert_data['custom']&.find { |e| e['status'] == 'default' })
-      if default_cert['name'] == Docuseal::AATL_CERT_NAME
-        Docuseal.default_pkcs
+      if default_cert['name'] == MorningcrunchSign::AATL_CERT_NAME
+        MorningcrunchSign.default_pkcs
       else
         OpenSSL::PKCS12.new(Base64.urlsafe_decode64(default_cert['data']), default_cert['password'].to_s)
       end
@@ -132,12 +132,12 @@ module Accounts
   end
 
   def load_timeserver_url(account)
-    if Docuseal.multitenant?
-      Docuseal::TIMESERVER_URL
+    if MorningcrunchSign.multitenant?
+      MorningcrunchSign::TIMESERVER_URL
     else
       url = EncryptedConfig.find_by(account:, key: EncryptedConfig::TIMESTAMP_SERVER_URL_KEY)&.value
 
-      unless Docuseal.multitenant?
+      unless MorningcrunchSign.multitenant?
         url ||=
           Account.order(:id).first.encrypted_configs.find_by(key: EncryptedConfig::TIMESTAMP_SERVER_URL_KEY)&.value
       end
@@ -148,12 +148,12 @@ module Accounts
 
   def load_trusted_certs(account)
     cert_data =
-      if Docuseal.multitenant?
+      if MorningcrunchSign.multitenant?
         value = EncryptedConfig.find_by(account:, key: EncryptedConfig::ESIGN_CERTS_KEY)&.value || {}
 
-        Docuseal::CERTS.merge(value)
-      elsif Docuseal::CERTS.present?
-        Docuseal::CERTS
+        MorningcrunchSign::CERTS.merge(value)
+      elsif MorningcrunchSign::CERTS.present?
+        MorningcrunchSign::CERTS
       else
         EncryptedConfig.find_by(key: EncryptedConfig::ESIGN_CERTS_KEY)&.value || {}
       end
@@ -170,11 +170,11 @@ module Accounts
      *default_pkcs.ca_certs,
      *custom_certs.map(&:certificate),
      *custom_certs.flat_map(&:ca_certs).compact,
-     *Docuseal.trusted_certs]
+     *MorningcrunchSign.trusted_certs]
   end
 
   def can_send_emails?(_account, **_params)
-    return true if Docuseal.multitenant?
+    return true if MorningcrunchSign.multitenant?
     return true if ENV['SMTP_ADDRESS'].present?
 
     EncryptedConfig.exists?(key: EncryptedConfig::EMAIL_SMTP_KEY)

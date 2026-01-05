@@ -42,7 +42,7 @@ module Templates
   end
 
   def search(current_user, templates, keyword)
-    if Docuseal.fulltext_search?
+    if MorningcrunchSign.fulltext_search?
       fulltext_search(current_user, templates, keyword)
     else
       plain_search(templates, keyword)

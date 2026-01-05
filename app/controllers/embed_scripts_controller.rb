@@ -9,7 +9,7 @@ class EmbedScriptsController < ActionController::Metal
             <h2>Upgrade to Pro</h2>
             <p>Unlock embedded components by upgrading to Pro</p>
             <div style="margin-top: 40px;">
-              <a href="#{Docuseal::CONSOLE_URL}/on_premises" target="_blank" style="padding: 15px 25px; background-color: #222; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+              <a href="#{MorningcrunchSign::CONSOLE_URL}/on_premises" target="_blank" style="padding: 15px 25px; background-color: #222; color: white; text-decoration: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
                 Learn More
               </a>
             </div>
@@ -20,12 +20,12 @@ class EmbedScriptsController < ActionController::Metal
 
     const DummyForm = class extends DummyBuilder {};
 
-    if (!window.customElements.get('docuseal-builder')) {
-      window.customElements.define('docuseal-builder', DummyBuilder);
+    if (!window.customElements.get('morningcrunch-sign-builder')) {
+      window.customElements.define('morningcrunch-sign-builder', DummyBuilder);
     }
 
-    if (!window.customElements.get('docuseal-form')) {
-      window.customElements.define('docuseal-form', DummyForm);
+    if (!window.customElements.get('morningcrunch-sign-form')) {
+      window.customElements.define('morningcrunch-sign-form', DummyForm);
     }
   JAVASCRIPT
 

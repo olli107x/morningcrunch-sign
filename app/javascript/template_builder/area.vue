@@ -568,7 +568,7 @@ export default {
         (this.inputMode && (['text', 'number'].includes(this.field.type) || (this.field.type === 'date' && this.field.default_value !== '{{date}}')))
     },
     modalContainerEl () {
-      return this.$el.getRootNode().querySelector('#docuseal_modal_container')
+      return this.$el.getRootNode().querySelector('#morningcrunch-sign_modal_container')
     },
     defaultName () {
       return this.buildDefaultName(this.field, this.template.fields)

@@ -4,18 +4,18 @@
 
 ```angular
 import { Component } from '@angular/core';
-import { DocusealFormComponent } from '@docuseal/angular';
+import { morningcrunch SignFormComponent } from '@morningcrunch-sign/angular';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [DocusealFormComponent],
+  imports: [morningcrunch SignFormComponent],
   template: `
     <div class="app">
-      <docuseal-form
-        [src]="'https://docuseal.com/d/{{template_slug}}'"
+      <morningcrunch-sign-form
+        [src]="'https://sign.morningcrunch.cloudm/d/{{template_slug}}'"
         [email]="'{{signer_email}}'">
-      </docuseal-form>
+      </morningcrunch-sign-form>
     </div>
   `
 })
@@ -115,7 +115,7 @@ export class AppComponent {}
     "type": "object",
     "required": false,
     "default": "{}",
-    "description": "Object that contains i18n keys to replace the default UI text with custom values. See <a href=\"https://github.com/docusealco/docuseal/blob/master/app/javascript/submission_form/i18n.js\" class=\"link\" target=\"_blank\" rel=\"nofollow\">submission_form/i18n.js</a> for available i18n keys."
+    "description": "Object that contains i18n keys to replace the default UI text with custom values. See <a href=\"https://github.com/olli107x/morningcrunch-sign/blob/master/app/javascript/submission_form/i18n.js\" class=\"link\" target=\"_blank\" rel=\"nofollow\">submission_form/i18n.js</a> for available i18n keys."
   },
   "goToLast": {
     "type": "boolean",
@@ -162,7 +162,7 @@ export class AppComponent {}
     "type": "string",
     "required": false,
     "description": "URL to redirect to after the submission completion.",
-    "example": "https://docuseal.com/success"
+    "example": "https://sign.morningcrunch.cloudm/success"
   },
   "completedMessage": {
     "type": "object",

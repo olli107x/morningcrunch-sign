@@ -5,17 +5,17 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        docuseal: {
+        'morningcrunch-sign': {
           'color-scheme': 'light',
-          primary: '#e4e0e1',
-          secondary: '#ef9fbc',
-          accent: '#eeaf3a',
-          neutral: '#291334',
-          'base-100': '#faf7f5',
-          'base-200': '#efeae6',
-          'base-300': '#e7e2df',
-          'base-content': '#291334',
-          '--rounded-btn': '1.9rem',
+          primary: '#FF6B35',
+          secondary: '#1E1E1E',
+          accent: '#FF6B35',
+          neutral: '#1E1E1E',
+          'base-100': '#FFFFFF',
+          'base-200': '#F5F5F5',
+          'base-300': '#E5E5E5',
+          'base-content': '#1E1E1E',
+          '--rounded-btn': '0.5rem',
           '--tab-border': '2px',
           '--tab-radius': '.5rem'
         }

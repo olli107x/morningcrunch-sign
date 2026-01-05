@@ -1,10 +1,4 @@
-<p>
-  ---
-</p>
-<p>
-  <% if @current_account&.testing? %>
-    <%= t('sent_using_product_name_in_testing_mode_html', product_url: "#{Docuseal::PRODUCT_EMAIL_URL}/start", product_name: Docuseal.product_name) %>
-  <% else %>
-    <%= t('sent_using_product_name_free_document_signing_html', product_url: "#{Docuseal::PRODUCT_EMAIL_URL}/start", product_name: Docuseal.product_name) %>
-  <% end %>
+<p style="color: #6b7280; font-size: 12px; margin-top: 24px;">
+  ---<br>
+  <%= MorningcrunchSign.product_name %>
 </p>

@@ -235,7 +235,7 @@ export default {
       return `/auth/google_oauth2?${query}`
     },
     modalContainerEl () {
-      return this.$el.getRootNode().querySelector('#docuseal_modal_container')
+      return this.$el.getRootNode().querySelector('#morningcrunch-sign_modal_container')
     }
   },
   mounted () {

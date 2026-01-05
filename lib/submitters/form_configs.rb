@@ -16,7 +16,7 @@ module Submitters
                     AccountConfig::ALLOW_TYPED_SIGNATURE,
                     AccountConfig::WITH_SUBMITTER_TIMEZONE_KEY,
                     AccountConfig::WITH_SIGNATURE_ID_REASON_KEY,
-                    *(Docuseal.multitenant? ? [] : [AccountConfig::POLICY_LINKS_KEY])].freeze
+                    *(MorningcrunchSign.multitenant? ? [] : [AccountConfig::POLICY_LINKS_KEY])].freeze
 
     module_function
 

@@ -1,39 +1,39 @@
 # frozen_string_literal: true
 
-module Docuseal
+module MorningcrunchSign
   URL_CACHE = ActiveSupport::Cache::MemoryStore.new
-  PRODUCT_URL = 'https://www.docuseal.com'
+  PRODUCT_URL = 'https://sign.morningcrunch.cloud'
   PRODUCT_EMAIL_URL = ENV.fetch('PRODUCT_EMAIL_URL', PRODUCT_URL)
   NEWSLETTER_URL = "#{PRODUCT_URL}/newsletters".freeze
   ENQUIRIES_URL = "#{PRODUCT_URL}/enquiries".freeze
-  PRODUCT_NAME = 'DocuSeal'
+  PRODUCT_NAME = 'morningcrunch Sign'
   DEFAULT_APP_URL = ENV.fetch('APP_URL', 'http://localhost:3000')
-  GITHUB_URL = 'https://github.com/docusealco/docuseal'
-  DISCORD_URL = 'https://discord.gg/qygYCDGck9'
-  TWITTER_URL = 'https://twitter.com/docusealco'
-  TWITTER_HANDLE = '@docusealco'
-  CHATGPT_URL = "#{PRODUCT_URL}/chat".freeze
-  SUPPORT_EMAIL = 'support@docuseal.com'
+  GITHUB_URL = 'https://github.com/olli107x/morningcrunch-sign'
+  DISCORD_URL = nil
+  TWITTER_URL = nil
+  TWITTER_HANDLE = nil
+  CHATGPT_URL = nil
+  SUPPORT_EMAIL = 'support@morningcrunch.cloud'
   HOST = ENV.fetch('HOST', 'localhost')
-  AATL_CERT_NAME = 'docuseal_aatl'
+  AATL_CERT_NAME = 'morningcrunch_sign_aatl'
   CONSOLE_URL = if Rails.env.development?
                   'http://console.localhost.io:3001'
                 elsif ENV['MULTITENANT'] == 'true'
                   "https://console.#{HOST}"
                 else
-                  'https://console.docuseal.com'
+                  'https://sign.morningcrunch.cloud'
                 end
   CLOUD_URL = if Rails.env.development?
                 'http://localhost:3000'
               else
-                'https://docuseal.com'
+                'https://sign.morningcrunch.cloud'
               end
   CDN_URL = if Rails.env.development?
               'http://localhost:3000'
             elsif ENV['MULTITENANT'] == 'true'
               "https://cdn.#{HOST}"
             else
-              'https://cdn.docuseal.com'
+              'https://sign.morningcrunch.cloud'
             end
 
   CERTS = JSON.parse(ENV.fetch('CERTS', '{}'))
@@ -68,9 +68,9 @@ module Docuseal
   end
 
   def default_pkcs
-    return if Docuseal::CERTS['enabled'] == false
+    return if MorningcrunchSign::CERTS['enabled'] == false
 
-    @default_pkcs ||= GenerateCertificate.load_pkcs(Docuseal::CERTS)
+    @default_pkcs ||= GenerateCertificate.load_pkcs(MorningcrunchSign::CERTS)
   end
 
   def fulltext_search?
@@ -78,7 +78,7 @@ module Docuseal
 
     @fulltext_search =
       if SearchEntry.table_exists?
-        Docuseal.multitenant? || AccountConfig.exists?(key: :fulltext_search, value: true)
+        MorningcrunchSign.multitenant? || AccountConfig.exists?(key: :fulltext_search, value: true)
       else
         false
       end

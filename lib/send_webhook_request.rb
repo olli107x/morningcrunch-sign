@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module SendWebhookRequest
-  USER_AGENT = 'DocuSeal.com Webhook'
+  USER_AGENT = 'MorningcrunchSign.com Webhook'
 
   LOCALHOSTS = DownloadUtils::LOCALHOSTS
 
@@ -21,7 +21,7 @@ module SendWebhookRequest
       Addressable::URI.parse(webhook_url.url).normalize
     end
 
-    if Docuseal.multitenant?
+    if MorningcrunchSign.multitenant?
       raise HttpsError, 'Only HTTPS is allowed.' if uri.scheme != 'https' &&
                                                     !AccountConfig.exists?(key: :allow_http,
                                                                            account_id: webhook_url.account_id)

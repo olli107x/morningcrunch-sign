@@ -1,9 +1,9 @@
 self.addEventListener('install', () => {
-  console.log('DocuSeal App installed')
+  console.log('morningcrunch Sign App installed')
 })
 
 self.addEventListener('activate', () => {
-  console.log('DocuSeal App activated')
+  console.log('morningcrunch Sign App activated')
 })
 
 self.addEventListener('fetch', (event) => {
