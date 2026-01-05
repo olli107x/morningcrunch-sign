@@ -1,16 +1,10 @@
 <template>
-  <svg
+  <img
+    src="/mc-logo.png"
+    alt="morningcrunch"
     height="40"
-    width="40"
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect width="40" height="40" rx="8" fill="#003DFF" />
-    <text x="5" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700">
-      <tspan fill="#FFFFFF">m</tspan><tspan fill="#D3FF33">c</tspan>
-    </text>
-  </svg>
+    width="93"
+  />
 </template>
 
 <script>
