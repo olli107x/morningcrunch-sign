@@ -57,6 +57,12 @@ Style/ConditionalAssignment:
 Style/SafeNavigation:
   Enabled: false
 
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Style/RedundantCondition:
+  Enabled: false
+
 Style/MultipleComparison:
   Enabled: false
 
