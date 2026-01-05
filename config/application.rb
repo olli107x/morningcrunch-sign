@@ -19,6 +19,9 @@ module MorningcrunchSign
   class Application < Rails::Application
     config.load_defaults 8.0
 
+    # Load MorningcrunchSign module methods before autoloading lib/
+    require_relative '../lib/morningcrunch_sign'
+
     config.autoload_lib(ignore: %w[assets tasks puma])
 
     config.active_storage.routes_prefix = ''
