@@ -2,6 +2,7 @@
 
 RSpec.describe SendFormCompletedWebhookRequestJob do
   include ActiveSupport::Testing::TimeHelpers
+
   let(:account) { create(:account) }
   let(:user) { create(:user, account:) }
   let(:template) { create(:template, account:, author: user) }
