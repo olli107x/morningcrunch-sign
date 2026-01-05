@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  app:
+    image: ghcr.io/olli107x/morningcrunch-sign:latest
+    container_name: morningcrunch-sign
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./data:/data/morningcrunch-sign
+    environment:
+      - HOST=sign.morningcrunch.cloud
+      - FORCE_SSL=true
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/morningcrunch_sign
+    networks:
+      - traefik-public
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.morningcrunch-sign.rule=Host(`sign.morningcrunch.cloud`)"
+      - "traefik.http.routers.morningcrunch-sign.entrypoints=websecure"
+      - "traefik.http.routers.morningcrunch-sign.tls=true"
+      - "traefik.http.routers.morningcrunch-sign.tls.certresolver=letsencrypt"
+      - "traefik.http.services.morningcrunch-sign.loadbalancer.server.port=3000"
+      - "traefik.docker.network=traefik-public"
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: morningcrunch-sign-db
+    restart: unless-stopped
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: morningcrunch_sign
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+networks:
+  traefik-public:
+    external: true
+  internal:
+    driver: bridge
