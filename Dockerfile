@@ -72,6 +72,7 @@ RUN apk add --no-cache build-base && bundle install && apk del --no-cache build-
 RUN echo 'https://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && echo 'https://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && apk add --no-cache onnxruntime
 
 COPY ./bin ./bin
+RUN chmod +x ./bin/*
 COPY ./app ./app
 COPY ./config ./config
 COPY ./db/migrate ./db/migrate
