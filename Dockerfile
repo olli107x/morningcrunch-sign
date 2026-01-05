@@ -97,4 +97,4 @@ WORKDIR /data/morningcrunch-sign
 ENV WORKDIR=/data/morningcrunch-sign
 
 EXPOSE 3000
-CMD ["/app/bin/bundle", "exec", "puma", "-C", "/app/config/puma.rb", "--dir", "/app"]
+CMD ["bundle", "exec", "puma", "-C", "/app/config/puma.rb", "--dir", "/app"]
