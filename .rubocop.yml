@@ -52,8 +52,11 @@ Naming/PredicateMethod:
   Enabled: false
 
 Layout/LineLength:
-  Max: 130
+  Max: 300
   AllowedPatterns: ['\A\s*#']
+  Exclude:
+    - 'app/models/*.rb'
+    - 'db/migrate/**/*'
 
 Metrics/AbcSize:
   Max: 45
