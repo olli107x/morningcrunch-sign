@@ -40,7 +40,6 @@ module Submissions
       submissions.where(created_by_user_id: user&.id || -1)
     end
 
-    # rubocop:disable Metrics/MethodLength
     def filter_by_status(submissions, filters)
       case filters[:status]
       when 'pending'
@@ -78,7 +77,6 @@ module Submissions
         submissions
       end
     end
-    # rubocop:enable Metrics/MethodLength
 
     def filter_by_created_at(submissions, filters)
       submissions = submissions.where(created_at: filters[:created_at_from]..) if filters[:created_at_from].present?

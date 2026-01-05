@@ -50,12 +50,10 @@ class AccountsController < ApplicationController
     true_user.update!(locked_at: Time.current, email: true_user.email.sub('@', '+removed@'))
     true_user.account.update!(archived_at: Time.current)
 
-    # rubocop:disable Layout/LineLength
     render turbo_stream: turbo_stream.replace(
       :account_delete_button,
       html: helpers.tag.p(I18n.t('your_account_removal_request_will_be_processed_within_2_months_please_contact_us_if_you_want_to_keep_your_account'))
     )
-    # rubocop:enable Layout/LineLength
   end
 
   private
