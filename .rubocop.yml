@@ -52,6 +52,7 @@ Naming/PredicateMethod:
   Enabled: false
 
 Layout/LineLength:
+  Max: 130
   AllowedPatterns: ['\A\s*#']
 
 Metrics/AbcSize:
